@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+
 <h1>Listing Profiles</h1>
 
 <table>
   <thead>
     <tr>
-      <th>First </th>
-      <th>Name</th>
+      <th>First_name </th>
       <th>Medium name</th>
       <th>Last name</th>
       <th>Age</th>
@@ -21,8 +21,7 @@
   <tbody>
     <% @profiles.each do |profile| %>
       <tr>
-        <td><%= profile.first_ %></td>
-        <td><%= profile.name %></td>
+        <td><%= profile.first_name %></td>
         <td><%= profile.medium_name %></td>
         <td><%= profile.last_name %></td>
         <td><%= profile.age %></td>

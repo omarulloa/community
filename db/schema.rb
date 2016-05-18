@@ -11,11 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160517030749) do
+ActiveRecord::Schema.define(version: 20160518023935) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "street"
+    t.integer  "number"
+    t.string   "colony"
+    t.string   "sector"
+    t.string   "references"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "first_"
-    t.string   "name"
     t.string   "medium_name"
     t.string   "last_name"
     t.integer  "age"
@@ -25,11 +33,18 @@ ActiveRecord::Schema.define(version: 20160517030749) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "first_name"
   end
 
   add_index "profiles", ["address_id"], name: "index_profiles_on_address_id"
   add_index "profiles", ["rol_id"], name: "index_profiles_on_rol_id"
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "rols", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -11,13 +11,27 @@
     </div>
   <% end %>
 
+  <%= fields_for @profile.address do |address_fields| %>
   <div class="field">
-    <%= f.label :first_ %><br>
-    <%= f.text_field :first_ %>
+    <%= address_fields.label :street%><br>
+    <%= address_fields.text_field :street%>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= address_fields.label :number%><br>
+    <%= address_fields.text_field :number%>
+  </div>
+  <div class="field">
+    <%= address_fields.label :colony%><br>
+    <%= address_fields.text_field :colony%>
+  </div>
+
+
+<% end %>
+
+
+  <div class="field">
+    <%= f.label :first_name%><br>
+    <%= f.text_field :first_name%>
   </div>
   <div class="field">
     <%= f.label :medium_name %><br>
