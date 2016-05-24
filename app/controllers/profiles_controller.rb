@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
-    @profile.address = Address.new
+    @profile.build_address
   end
 
   # GET /profiles/1/edit
@@ -26,9 +26,13 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
+    
 
     respond_to do |format|
       if @profile.save
+        address = Address.new address_params
+        address.profile_id = @profile.id
+        address.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -64,12 +68,16 @@ class ProfilesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_profile
+    def set_profile 
       @profile = Profile.find(params[:id])
+    end
+
+    def address_params
+      params.require(:address).permit(:street, :number)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:first_name, :medium_name, :last_name, :age, :email, :rol_id, :address_id, :user_id, :street, :number, :colony)
+      params.require(:profile).permit(:first_name, :medium_name, :last_name, :age, :email, :rol_id, address_attributes:[:street])
     end
 end
